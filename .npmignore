@@ -1,0 +1,13 @@
+.roo
+dist/*
+.env
+node_modules
+package-lock.json
+croma
+chroma-data
+repos
+index/*
+data/last_commit.json
+data/last_sync_time.json
+streamlit\ app/*
+.vscode

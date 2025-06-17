@@ -1,0 +1,37 @@
+http.post./configure_llm:
+  fn: configure_llm_fn
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - apiKey
+            - model
+          properties:
+            apiKey:
+              type: string
+            model:
+              type: string
+  responses:
+    200:
+      description: Configured successfully. 
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Success message
+    400:
+      description: Invalid Key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message
+

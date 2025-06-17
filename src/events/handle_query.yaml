@@ -1,0 +1,13 @@
+"mcp.handle-query":
+  fn: mcp_server
+  type: tool
+  summary: Handle query from Roocode
+  description: Responds to natural language questions using internal RAG pipeline.
+  body:
+    type: object
+    required:
+      - query
+    properties:
+      query:
+        type: string
+  

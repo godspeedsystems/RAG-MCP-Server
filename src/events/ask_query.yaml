@@ -1,0 +1,34 @@
+http.post./ask_query:
+  fn: ask_query
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - query
+          properties:
+            query:
+              type: string
+              description: Give me query.
+  responses:
+    200:
+      description: Response generated successfully. 
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Success message
+    400:
+      description: Invalid Query
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message

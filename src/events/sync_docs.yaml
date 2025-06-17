@@ -1,0 +1,2 @@
+cron.*/1 * * * *.Asia/Kolkata:
+  fn: sync_docs_fn

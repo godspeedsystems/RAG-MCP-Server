@@ -1,0 +1,12 @@
+node_modules
+dist/*
+package-lock.json
+croma
+chroma-data
+repos
+.env
+index/*
+data/last_commit.json
+data/last_sync_time.json
+.roo
+streamlit\ app/*

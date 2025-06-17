@@ -1,0 +1,36 @@
+http.post./upload_docs:
+  fn: upload_docs_fn
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - filename 
+            - file
+          properties:
+            filename:
+              type: string
+            file:
+              type: string 
+  responses:
+    200:
+      description: Uploaded file successfully. 
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Success message
+    400:
+      description: Invalid file
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message

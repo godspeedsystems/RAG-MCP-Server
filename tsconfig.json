@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"target": "es2022",
+		"lib": ["es2022"],
+		"module": "esnext",
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"strict": true,
+		"moduleResolution": "node",
+		"sourceMap": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true
+	},
+	"exclude": [
+		"./node_modules"
+	],
+	"name": "RAG"
+}

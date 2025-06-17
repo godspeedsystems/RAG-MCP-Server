@@ -1,0 +1,5 @@
+id: sync_docs_fn
+tasks:
+  - id: run_sync
+    fn: ingest_and_update_docs
+    args: {}

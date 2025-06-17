@@ -1,0 +1,10 @@
+onlyBuiltDependencies:
+  - '@prisma/client'
+  - '@prisma/engines'
+  - '@scarf/scarf'
+  - '@swc/core'
+  - faiss-node
+  - prisma
+  - protobufjs
+  - sharp
+  - tesseract.js
