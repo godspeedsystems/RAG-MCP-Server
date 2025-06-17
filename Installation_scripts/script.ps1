@@ -113,7 +113,7 @@ try {
 #region RAG Node Installation and .env Setup
 Write-Host "Installing rag-node ...." -ForegroundColor Cyan
 try {
-    npm install -g rag-node
+    npm install -g @godspeedsystems/rag-node
 } catch {
     Write-Host "rag-node installation failed: $_" -ForegroundColor Red
     exit

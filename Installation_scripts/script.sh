@@ -100,7 +100,7 @@ print_success "npm version: $(npm -v)"
 
 # rag-node Installation and .env Setup
 print_message "Installing rag-node..."
-npm install -g rag-node
+npm install -g @godspeedsystems/rag-node
 
 # Locate global installation directory
 print_message "Locating global rag-node installation directory..."
