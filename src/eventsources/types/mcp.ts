@@ -114,7 +114,7 @@ export default class EventSource extends GSEventSource {
                       content: [
                         {
                           type: 'text',
-                          text: res?.data?.context || res?.message || "",
+                          text: res?.data?.context || res?.message || "Possible Error : Invalid Gemini API KEY for rag-node server",
                            },
                            {
                           type: 'text',
