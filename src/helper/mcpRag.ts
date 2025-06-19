@@ -1,4 +1,10 @@
 import { VectorStore } from './vectorStore';
+const fs = require('fs');
+const logStream = fs.createWriteStream('logs.txt', { flags: 'a' });
+
+console.log = function(message) {
+  logStream.write(`${new Date().toISOString()} - ${message}\n`);
+};
 
 export class RAGPipeline {
     private vs: VectorStore;

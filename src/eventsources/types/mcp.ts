@@ -114,11 +114,11 @@ export default class EventSource extends GSEventSource {
                       content: [
                         {
                           type: 'text',
-                          text: res?.data?.context || res?.message,
+                          text: res?.data?.context || res?.message || "",
                            },
                            {
                           type: 'text',
-                          text: res?.data?.source_files,
+                          text: res?.data?.source_files || "",
                            }
                       ],
                 };
