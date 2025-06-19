@@ -10,3 +10,4 @@ data/last_commit.json
 data/last_sync_time.json
 .roo
 streamlit\ app/*
+logs.txt

@@ -11,3 +11,4 @@ data/last_commit.json
 data/last_sync_time.json
 streamlit\ app/*
 .vscode
+logs.txt
