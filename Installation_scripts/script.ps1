@@ -130,23 +130,23 @@ if (-not (Test-Path $ragNodeDir)) {
 }
 
 # Prompt user for GOOGLE_API_KEY with masking
-# Write-Host "`nEnter your GOOGLE_API_KEY for rag-node." -ForegroundColor Cyan
-# Write-Host "Note: This key will NOT be stored or transmitted to any Godspeed server." -ForegroundColor Yellow
-# Write-Host "It will remain saved ONLY in the local '.env' file on your machine." -ForegroundColor Yellow
-# # Write-Host "Paste your key below:" -ForegroundColor Cyan
+Write-Host "`nEnter your GOOGLE_API_KEY for rag-node." -ForegroundColor Cyan
+Write-Host "Note: This key will NOT be stored or transmitted to any Godspeed server." -ForegroundColor Yellow
+Write-Host "It will remain saved ONLY in the local '.env' file on your machine." -ForegroundColor Yellow
+# Write-Host "Paste your key below:" -ForegroundColor Cyan
 
-# $plainKey = Read-Host -Prompt "GOOGLE_API_KEY"
+$plainKey = Read-Host -Prompt "GOOGLE_API_KEY"
 
-# # Write to .env file
-# $envFilePath = Join-Path $ragNodeDir ".env"
-# try {
-#     Write-Host "Writing GOOGLE_API_KEY to .env file..."
-#     Set-Content -Path $envFilePath -Value "GOOGLE_API_KEY=$plainKey"
-#     Write-Host "Successfully configured API Key" -ForegroundColor Green
-# } catch {
-#     Write-Host "Failed to write .env file: $_" -ForegroundColor Red
-#     exit
-# }
+# Write to .env file
+$envFilePath = Join-Path $ragNodeDir ".env"
+try {
+    Write-Host "Writing GOOGLE_API_KEY to .env file..."
+    Set-Content -Path $envFilePath -Value "GOOGLE_API_KEY=$plainKey"
+    Write-Host "Successfully configured API Key" -ForegroundColor Green
+} catch {
+    Write-Host "Failed to write .env file: $_" -ForegroundColor Red
+    exit
+}
 
 # Final checks
 Write-Host "`nVerifying installations..." -ForegroundColor Cyan
