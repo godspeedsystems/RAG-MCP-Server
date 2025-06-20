@@ -128,19 +128,19 @@ if [[ ! -d "$RAG_NODE_DIR" ]]; then
     exit 1
 fi
 
-# # Prompt user for GOOGLE_API_KEY with masking
-# print_message ""
-# print_message "Enter your GOOGLE_API_KEY for rag-node."
-# print_warning "Note: This key will NOT be stored or sent to any server. It will only be written to a local .env file."
+# Prompt user for GOOGLE_API_KEY with masking
+print_message ""
+print_message "Enter your GOOGLE_API_KEY for rag-node."
+print_warning "Note: This key will NOT be stored or sent to any server. It will only be written to a local .env file."
 
-# # Prompt silently
-# read -rs -p "GOOGLE_API_KEY: " GOOGLE_API_KEY
-# echo ""
+# Prompt silently
+read -rs -p "GOOGLE_API_KEY: " GOOGLE_API_KEY
+echo ""
 
-# # Write to .env file in the rag-node directory
-# ENV_FILE="$RAG_NODE_DIR/.env"
-# echo "GOOGLE_API_KEY=$GOOGLE_API_KEY" > "$ENV_FILE"
-# print_success "Successfully configured API Key"
+# Write to .env file in the rag-node directory
+ENV_FILE="$RAG_NODE_DIR/.env"
+echo "GOOGLE_API_KEY=$GOOGLE_API_KEY" > "$ENV_FILE"
+print_success "Successfully configured API Key"
 
 
 print_success "Godspeed CLI version: $(godspeed --version)"
