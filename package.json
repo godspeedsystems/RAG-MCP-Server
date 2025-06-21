@@ -1,6 +1,6 @@
 {
 	"name": "@godspeedsystems/rag-node",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Godspeed RAG agent",
 	"homepage": "https://github.com/godspeedsystems/RAG-MCP-Server#readme",
 	"bugs": {
@@ -17,7 +17,12 @@
 	"directories": {
 		"doc": "docs"
 	},
+	"bin": {
+		"@godspeedsystems/rag-node": "start_clean.js"
+	},
 	"scripts": {
+		"fix-sh": "node fix-line-endings.js",
+		"prepack": "npm run fix-sh",
 		"gen-crud-api": "npx @godspeedsystems/api-generator",
 		"dev": "run-script-os",
 		"dev:win32": "nodemon --watch src -e ts,js,yaml,json -r dotenv src\\index.ts",
@@ -48,8 +53,16 @@
 		"@langchain/google-genai": "^0.2.10",
 		"@modelcontextprotocol/sdk": "^1.12.1",
 		"@prisma/client": "^6.8.2",
+		"@swc/cli": "^0.7.7",
+		"@swc/core": "^1.11.24",
+		"@types/config": "^3.3.5",
+		"@types/fs-extra": "^11.0.4",
+		"@types/node": "^22.15.19",
+		"@types/node-fetch": "^2.6.12",
+		"@types/pdf-parse": "^1.1.5",
 		"axios": "^1.9.0",
 		"config": "^4.0.0",
+		"copyfiles": "^2.4.1",
 		"dotenv": "^16.5.0",
 		"faiss-node": "^0.5.1",
 		"fs-extra": "^11.3.0",
@@ -58,25 +71,17 @@
 		"node-cron": "^4.1.0",
 		"node-fetch": "^2.7.0",
 		"node-html-parser": "^7.0.1",
+		"nodemon": "^3.1.10",
 		"openai": "^5.1.1",
 		"pdf-parse": "^1.1.1",
 		"pino-pretty": "^13.0.0",
 		"pnpm": "^10.12.1",
 		"prisma": "^6.8.2",
-		"tesseract.js": "^6.0.1",
-		"zod": "^3.25.56",
-		"@swc/cli": "^0.7.7",
-		"@swc/core": "^1.11.24",
-		"@types/config": "^3.3.5",
-		"@types/fs-extra": "^11.0.4",
-		"@types/node": "^22.15.19",
-		"@types/node-fetch": "^2.6.12",
-		"@types/pdf-parse": "^1.1.5",
-		"copyfiles": "^2.4.1",
-		"nodemon": "^3.1.10",
 		"run-script-os": "^1.1.6",
+		"tesseract.js": "^6.0.1",
 		"ts-node": "^10.9.2",
-		"typescript": "^5.8.3"
+		"typescript": "^5.8.3",
+		"zod": "^3.25.56"
 	},
 	"devDependencies": {
 		"@swc/cli": "^0.7.7",
