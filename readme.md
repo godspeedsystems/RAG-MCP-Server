@@ -77,27 +77,7 @@ A Retrieval-Augmented Generation (RAG) chatbot built using the [Godspeed Framewo
        │ GitHub Repo: gs-documentation           │
        └─────────────────────────────────────────┘
 ```
-# 🛠 Installation
 
-## Windows
-
-Open **PowerShell as Administrator**, then run:
-
-```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/godspeedsystems/RAG-MCP-Server/main/Installation_scripts/script.ps1" -OutFile "install.ps1"
-Start-Process powershell -ArgumentList "-File .\install.ps1" -Verb RunAs
-```
-
-## Linux/macOS
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/godspeedsystems/RAG-MCP-Server/main/Installation_scripts/script.sh -o GodspeedCLI.sh
-chmod +x GodspeedCLI.sh
-./GodspeedCLI.sh
-```
-
-
-📌 Once installed and an API key is provided, the project is automatically started by Saarthi by invoking the `start_clean` script.
 
 ---
 
@@ -151,7 +131,6 @@ Both scripts:
 -  Query handling through Saarthi and `mcp.handle-query`
 -  Documentation updates via GitHub sync (cron job)
 -  File-level change detection using SHA and GitHub diffs
--  API key configuration using `mcp.handle-api-key`
 -  Document ingestion through HTTP endpoint
 
 ---
