@@ -7,7 +7,7 @@ const fs = require("fs");
 
 try {
   // Path to package root
-  const pkgRoot = path.join(path.resolve(__dirname, ".."),"rag-mcp");
+  const pkgRoot = path.join(path.resolve(__dirname, ".."),"rag-node");
 
 
   // Change working directory to the package root
