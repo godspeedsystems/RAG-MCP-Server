@@ -1,12 +1,10 @@
 .roo
-dist/*
 .env
 node_modules
 package-lock.json
 croma
 chroma-data
 repos
-index/*
 data/last_commit.json
 data/last_sync_time.json
 streamlit\ app/*
@@ -15,3 +13,4 @@ logs.txt
 !start_clean.js
 !start_clean.bat
 !start_clean.sh
+src/*

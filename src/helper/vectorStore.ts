@@ -86,16 +86,6 @@ export class VectorStore {
         }
         return hits;
   }
-  async upsertDoc(docId: string, content: string): Promise<void> {
-    const newHash = crypto.createHash('sha256').update(content).digest('hex');
-    const prevHash = crypto.createHash('sha256').update(this.metadata[docId].content).digest('hex');
-    if(prevHash==newHash){
-      console.log(`skipping ${docId}, no changes detected`);
-      return;
-    }
-    this.removeDocument(docId);
-    this.upsert(docId,content);
-  }
 
   private ensureDir(filePath: string) {
   const dir = path.dirname(filePath);

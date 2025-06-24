@@ -1,4 +1,0 @@
-type: express
-port: 10947
-docs:
-  endpoint: /api-docs

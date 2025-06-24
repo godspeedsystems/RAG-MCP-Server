@@ -5,8 +5,6 @@ import { VectorStore } from './vectorStore';
 import pdfParse from 'pdf-parse';
 import { createWorker } from 'tesseract.js';
 import * as path from 'path';
-import mammoth from "mammoth";
-import { parse as htmlParse } from "node-html-parser";
 
 const vs=new VectorStore();
 interface GitTreeItem {
@@ -174,55 +172,4 @@ async function ingestChangedFiles(repoUrl: string, branch = 'main'): Promise<voi
     console.log('Ingestion complete.');
 }
 
-async function ingestUploadedFile(file: string, filename: string): Promise<string> {
-  
-    const ext = path.extname(filename).toLowerCase();
-    const buffer = Buffer.from(file, "base64");
-
-    let content = "";
-
-  
-    switch (ext) {
-        case ".pdf":
-          const pdf = await extractTextFromPdf(buffer);
-          content = pdf;
-          break;
-  
-        case ".docx":
-          const result = await mammoth.extractRawText({ buffer });
-          content = result.value;
-          break;
-  
-        case ".txt":
-        case ".md":
-          content = buffer.toString("utf-8");
-          break;
-  
-        case ".html":
-          const root = htmlParse(buffer.toString("utf-8"));
-          content = root.text;
-          break;
-  
-        default:
-          return `Unsupported file type: ${ext}`
-      }
-
-    const vs = new VectorStore();
-    const docId = path.basename(filename, path.extname(filename));
-    console.log(`[${docId}] Starting ingestion.`);
-
-    // Step 1: Split by pages or sections
-    const pages = content.split(/\n{2,}/).filter(p => p.trim().length > 0);
-    console.log(`[${docId}] ${pages.length} logical pages found.`);
-
-    // Step 2: Process each page
-    for (let i = 0; i < pages.length; i++) {
-        const pageContent = pages[i];
-        const pageId = `${docId}_page_${i + 1}`;
-        vs.upsertDoc(pageId,pageContent);
-    }
-    return `Document '${filename}' ingested successfully.`
-         
-}
-
-export { ingestChangedFiles, loadRepoUrl, ingestUploadedFile}
+export { ingestChangedFiles, loadRepoUrl}
