@@ -2,8 +2,6 @@
 .env
 node_modules
 package-lock.json
-croma
-chroma-data
 repos
 data/last_commit.json
 data/last_sync_time.json
@@ -11,6 +9,5 @@ streamlit\ app/*
 .vscode
 logs.txt
 !start_clean.js
-!start_clean.bat
-!start_clean.sh
 src/*
+chroma-data/*

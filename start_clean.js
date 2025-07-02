@@ -8,7 +8,7 @@ const fs = require("fs");
 try {
   // Path to package root
    const isWindows = os.platform() === "win32";
-  const pkgRoot = path.join(path.resolve(__dirname, ".."),"rag-mcp");
+  const pkgRoot = path.resolve(__dirname);
   // const entryFile = path.join("dist", "index.js");
   if(isWindows){
     execSync(`node dist\\index.js`, { stdio: "inherit", cwd: pkgRoot });
