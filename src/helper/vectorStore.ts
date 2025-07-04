@@ -238,7 +238,7 @@ export class VectorStore {
     if (!(docId in this.metadata)) return;
 
     const collection = await safeChroma(() =>
-      this.client.getCollection({
+      this.client.getOrCreateCollection({
         name: this.collectionName,
         embeddingFunction: this.embedder,
       })

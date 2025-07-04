@@ -65,7 +65,7 @@ export class RAGPipeline {
       allResults.sort((a: any, b: any) => b.relevanceScore - a.relevanceScore);
       docs = allResults.slice(0, maxResults);
     } else {
-      docs = await this.vs.search(optimizedQuery, maxResults * 2, filters);
+      docs = await this.vs.search(optimizedQuery, maxResults , filters);
     }
 
     log(`Found ${docs.length} relevant documents`);
