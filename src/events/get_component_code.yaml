@@ -1,0 +1,17 @@
+"mcp.get-component-code":
+  fn: get_component_code
+  type: tool
+  summary: "Get Component Code"
+  description: "Get component Code"
+  body:
+    type: object
+    properties:
+      components:
+        type: array
+        items:
+          type: object
+          properties:
+            category:
+              type: string
+            slug:
+              type: string

@@ -9,7 +9,7 @@ const LAST_SYNC_FILE = path.resolve(__dirname, '../../data/last_sync_time.json')
 const LOCK_FILE = path.resolve(__dirname, '../../data/sync.lock');
 // The lock is considered "expired" or "stale" if it's older than this value (20 minutes in ms).
 const LOCK_TIMEOUT_MS = 20 * 60 * 1000; 
-// The time to wait before re-syncing (24 hours in ms).
+// The time to wait before re-syncing (20 minutes in ms).
 const SYNC_INTERVAL_MS = 24 * 60 * 60 * 1000;
 
 

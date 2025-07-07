@@ -1,0 +1,12 @@
+"mcp.get-component-variants-metadata":
+  fn: get_component_variants_metadata
+  type: tool
+  summary: "Get Component Variants Metadata"
+  description: "Get component variants metadata"
+  body:
+    type: object
+    properties:
+      componentNames:
+        type: array
+        items:
+          type: string
