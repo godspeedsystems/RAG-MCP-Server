@@ -31,12 +31,13 @@ interface CompareResponse {
 }
 
 const COMMIT_FILE = path.resolve(__dirname, '../../data/last_commit.json');
-const REPO_URL_FILE = path.resolve(__dirname, '../../data/repo_url.json');
+const REPO_URLS_FILE = path.resolve(__dirname, '../../data/repo_urls.json');
 
-async function saveLastCommit(repo: string, commitSha: string) {
-    await fs.writeFile(COMMIT_FILE, JSON.stringify({ repo, commit: commitSha }), 'utf-8');
+async function saveLastCommits(commits: Record<string, string>) {
+    await fs.writeFile(COMMIT_FILE, JSON.stringify(commits, null, 2), 'utf-8');
 }
-async function loadLastCommit(): Promise<{ repo?: string; commit?: string }> {
+
+async function loadLastCommits(): Promise<Record<string, string>> {
     try {
         const data = await fs.readFile(COMMIT_FILE, 'utf-8');
         return JSON.parse(data);
@@ -45,13 +46,12 @@ async function loadLastCommit(): Promise<{ repo?: string; commit?: string }> {
     }
 }
 
-async function loadRepoUrl() {
+async function loadRepoUrls(): Promise<string[]> {
     try {
-        const data = await fs.readFile(REPO_URL_FILE, 'utf-8');
+        const data = await fs.readFile(REPO_URLS_FILE, 'utf-8');
         return JSON.parse(data);
-    }
-    catch {
-        return {};
+    } catch {
+        return [];
     }
 }
 async function getLatestCommitSha(owner: string, repo: string, branch: string): Promise<string> {
@@ -94,7 +94,7 @@ async function extractTextFromPdf(buffer: Buffer): Promise<string> {
         return '';
     }
 }
-async function ingestChangedFiles(repoUrl: string, branch = 'main'): Promise<void> {
+async function ingestChangedFiles(repoUrl: string, branch = 'main', lastCommits?: Record<string, string>): Promise<{repoUrl: string, latestSha: string | null}> {
     // const { repoUrl, branch = 'main' } = args;
     console.log("Entering...")
     const parts = repoUrl.replace(/\/$/, '').split('/');
@@ -102,19 +102,18 @@ async function ingestChangedFiles(repoUrl: string, branch = 'main'): Promise<voi
     const repo = parts[parts.length - 1];
     const latestSha = await getLatestCommitSha(owner, repo, branch);
     console.log("Got latest sha..")
-    const state = await loadLastCommit();
-    console.log("Got last commit...")
-    if (state.repo === repo && state.commit === latestSha) {
-        console.log('No new commit. Skipping ingestion.');
-        return;
+    let stateCommit = lastCommits ? lastCommits[repoUrl] : undefined;
+    if (stateCommit === latestSha) {
+        console.log(`[${repoUrl}] No new commit. Skipping ingestion.`);
+        return {repoUrl, latestSha: null};
     }
     // const vs = new VectorStore();
     console.log("Created vectorstore..")
     let changedFiles: string[] = [];
     let deletedFiles: string[] = [];
-    if (state.repo === repo && state.commit) {
+    if (stateCommit) {
         console.log("Getting changed files")
-        const changes = await getChangedFiles(owner, repo, state.commit, latestSha);
+        const changes = await getChangedFiles(owner, repo, stateCommit, latestSha);
         changedFiles = changes.changed;
         deletedFiles = changes.deleted;
     }
@@ -168,8 +167,25 @@ async function ingestChangedFiles(repoUrl: string, branch = 'main'): Promise<voi
             console.error(`Error processing file ${filePath}:`, e);
         }
     }
-    await saveLastCommit(repo, latestSha);
-    console.log('Ingestion complete.');
+    return {repoUrl, latestSha};
 }
 
-export { ingestChangedFiles, loadRepoUrl}
+async function ingestAllRepos(branch = 'main') {
+    const repoUrls = await loadRepoUrls();
+    const lastCommits = await loadLastCommits();
+    const newCommits: Record<string, string> = {...lastCommits};
+    for (const repoUrl of repoUrls) {
+        try {
+            const { latestSha } = await ingestChangedFiles(repoUrl, branch, lastCommits);
+            if (latestSha) {
+                newCommits[repoUrl] = latestSha;
+            }
+        } catch (e) {
+            console.error(`Error ingesting repo ${repoUrl}:`, e);
+        }
+    }
+    await saveLastCommits(newCommits);
+    console.log('All repo ingestions complete.');
+}
+
+export { ingestChangedFiles, loadRepoUrls, ingestAllRepos }
